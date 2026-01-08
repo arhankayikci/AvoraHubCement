@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AvoraHub - Turkish Cement Power for Global Projects. Premium construction materials and global logistics solutions.">
+    <title>AvoraHub | Turkish Cement Power for Global Projects</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Updated color palette - Deep Brown Theme */
+        :root {
+            --primary-charcoal: #2C2C2C;
+            --primary-brown: #8B4513;
+            --accent-clay: #A0522D;
+            --cement-grey: #646464;
+            --dark-bg: #1A1A1A;
+            --off-white: #FAFAFA;
+        }
+
+        /* Custom button hover effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(139, 69, 19, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #6B3410 0%, #8B4513 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 69, 19, 0.6);
+        }
+
+        /* Card hover effects */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #E2E8F0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(44, 44, 44, 0.2);
+            border-color: #8B4513;
+        }
+
+        .product-card:hover .product-icon {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+        }
+
+        .product-icon {
+            transition: all 0.4s ease;
+            background: #F5F5F5;
+            color: #8B4513;
+        }
+
+        /* Navbar scroll effect */
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(44, 44, 44, 0.15);
+        }
+
+        /* Logistics timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #8B4513;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #8B4513;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px);
+        }
+
+        /* Trust signals - NO animation (pulse animation removed for static display) */
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideInRight 0.4s ease-out;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form styles */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid #E2E8F0;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #8B4513;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15);
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #8B4513;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #6B3410;
+        }
+
+        /* Logo styles */
+        /* Logo Text Styling */
+        .logo-text {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #2C2C2C 0%, #8B4513 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo-text:hover {
+            letter-spacing: 1.5px;
+            transform: scale(1.02);
+        }
+
+        /* Marquee Styles */
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .marquee-item {
+            flex: 0 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logo {
+            height: 50px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #646464;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+        }
+
+        .partner-logo:hover {
+            opacity: 0.9;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee:hover .marquee-content {
+            animation-play-state: paused;
+        }
+
+        /* World Map Styles */
+        .world-map-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pulse-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #C85A17;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 50%;
+            animation: ripple 2s ease-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .trade-route {
+            fill: none;
+            stroke: #8B4513;
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+            opacity: 0.6;
+            animation: dash 20s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 9999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: whatsappPulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+        }
+
+        @keyframes whatsappPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(37, 211, 102, 0.8);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Text -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="logo-text">AVORAHUB</a>
+                </div>
+
+                <!-- Navigation Links (Desktop) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-[#2C2C2C] hover:text-[#8B4513] font-semibold transition-colors">Home</a>
+                    <a href="#products" class="text-[#2C2C2C] hover:text-[#8B4513] font-semibold transition-colors">Our
+                        Products</a>
+                    <a href="#logistics"
+                        class="text-[#2C2C2C] hover:text-[#8B4513] font-semibold transition-colors">Logistics</a>
+                    <a href="#contact"
+                        class="text-[#2C2C2C] hover:text-[#8B4513] font-semibold transition-colors">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center space-x-4">
+                    <button id="open-modal-btn"
+                        class="btn-primary text-white px-6 py-3 rounded-full font-semibold text-sm">
+                        Get SCO Quote
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-[#2C2C2C] focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <a href="#home"
+                    class="block px-3 py-2 text-[#2C2C2C] hover:bg-[#FFF5F0] hover:text-[#8B4513] font-semibold rounded-lg transition-colors">Home</a>
+                <a href="#products"
+                    class="block px-3 py-2 text-[#2C2C2C] hover:bg-[#FFF5F0] hover:text-[#8B4513] font-semibold rounded-lg transition-colors">Our
+                    Products</a>
+                <a href="#logistics"
+                    class="block px-3 py-2 text-[#2C2C2C] hover:bg-[#FFF5F0] hover:text-[#8B4513] font-semibold rounded-lg transition-colors">Logistics</a>
+                <a href="#contact"
+                    class="block px-3 py-2 text-[#2C2C2C] hover:bg-[#FFF5F0] hover:text-[#8B4513] font-semibold rounded-lg transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- QUOTE MODAL -->
+    <div id="quote-modal" class="modal">
+        <div class="modal-content">
+            <!-- Modal Header with Banner -->
+            <div class="relative bg-gradient-to-br from-[#2C2C2C] to-[#3D3D3D] p-8 rounded-t-24">
+                <button id="close-modal-btn"
+                    class="absolute top-4 right-4 text-white hover:text-[#8B4513] transition-colors">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex items-center justify-center mb-4">
+                    <img src="logo-dark.png" alt="AvoraHub" class="h-16">
+                </div>
+                <h2 class="text-3xl font-bold text-white text-center mb-2">Request Your Quote</h2>
+                <p class="text-center text-gray-300 text-sm">Fill out the form and our team will contact you within 24
+                    hours</p>
+            </div>
+
+            <!-- Modal Body - Form -->
+            <div class="p-8">
+                <form id="quote-form" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                            <i class="fas fa-user text-[#C85A17] mr-2"></i>Full Name *
+                        </label>
+                        <input type="text" name="fullname" required placeholder="Enter your full name"
+                            class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                            <i class="fas fa-building text-[#C85A17] mr-2"></i>Company Name *
+                        </label>
+                        <input type="text" name="company" required placeholder="Your company name"
+                            class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                            <i class="fab fa-whatsapp text-[#C85A17] mr-2"></i>WhatsApp Number *
+                        </label>
+                        <input type="tel" name="whatsapp" required placeholder="+90 XXX XXX XX XX"
+                            class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                                <i class="fas fa-box text-[#C85A17] mr-2"></i>Product Type *
+                            </label>
+                            <select name="product" required class="form-input w-full px-4 py-3 rounded-lg">
+                                <option value="">Select product</option>
+                                <option value="Grey Cement">Grey Cement</option>
+                                <option value="Clinker">Clinker</option>
+                                <option value="SRC">SRC (Sulphate Resistant)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                                <i class="fas fa-balance-scale text-[#C85A17] mr-2"></i>Quantity (MT) *
+                            </label>
+                            <input type="number" name="quantity" required placeholder="e.g., 5000"
+                                class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                            <i class="fas fa-ship text-[#C85A17] mr-2"></i>Destination Port *
+                        </label>
+                        <input type="text" name="destination" required placeholder="e.g., Lagos Port, Nigeria"
+                            class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+
+                    <button type="submit"
+                        class="btn-primary w-full text-white px-8 py-4 rounded-full font-semibold text-lg mt-6">
+                        <i class="fas fa-paper-plane mr-2"></i>Submit Request
+                    </button>
+                </form>
+
+                <!-- Trust Badges -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-600">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-shield-alt text-green-500"></i>
+                            <span>Secure & Confidential</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-clock text-[#C85A17]"></i>
+                            <span>24h Response</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>No Obligation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 bg-[#FAFAFA]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Left Column: Text Content -->
+                <div class="animate-fade-in-up">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-[#2C2C2C] leading-tight mb-6">
+                        Turkish Cement Power for Global Projects.
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We bridge the gap between Turkey's massive production capacity and your construction needs.
+                        Managing the entire supply chain to West Africa & USA.
+                    </p>
+
+                    <!-- CTA Button -->
+                    <div class="mb-8">
+                        <button id="hero-cta-btn"
+                            class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-lg">
+                            Request Corporate Offer
+                        </button>
+                    </div>
+
+                    <!-- Trust Signals -->
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-700">
+                        <div class="trust-signal flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span class="font-medium">EN 197-1 Compliant</span>
+                        </div>
+                        <div class="trust-signal flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-sm"
+                            style="animation-delay: 0.3s">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span class="font-medium">SGS Inspected</span>
+                        </div>
+                        <div class="trust-signal flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-sm"
+                            style="animation-delay: 0.6s">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span class="font-medium">Direct Factory Access</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Hero Image -->
+                <div class="animate-float">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop"
+                            alt="Global Cement Trading - Cargo Ship at Port" class="w-full h-auto object-cover">
+                        <!-- Overlay gradient for better image quality -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A2E]/20 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGISTICS PARTNERS MARQUEE -->
+    <section class="py-12 bg-white border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-xs font-semibold tracking-widest text-gray-500 mb-8 uppercase">
+                Trusted Logistics & Inspection Partners
+            </p>
+            <div class="marquee">
+                <div class="marquee-content">
+                    <!-- First set of logos -->
+                    <div class="marquee-item">
+                        <div class="partner-logo">MAERSK</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">MSC</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">CMA CGM</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">SGS</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">BUREAU VERITAS</div>
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="marquee-item">
+                        <div class="partner-logo">MAERSK</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">MSC</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">CMA CGM</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">SGS</div>
+                    </div>
+                    <div class="marquee-item">
+                        <div class="partner-logo">BUREAU VERITAS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-[#2C2C2C] mb-4">
+                    Premium Construction Materials
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#C85A17] to-[#D2691E] mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Grey Portland Cement -->
+                <div class="product-card bg-white rounded-2xl p-8 hover:shadow-xl">
+                    <div class="product-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cube text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#2C2C2C] mb-4">
+                        Grey Portland Cement
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        CEM I 42.5 R/N & CEM II. High early strength. Bulk or 50kg Kraft Bags.
+                    </p>
+                </div>
+
+                <!-- Card 2: Sulphate Resistant (SRC) -->
+                <div class="product-card bg-white rounded-2xl p-8 hover:shadow-xl">
+                    <div class="product-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#2C2C2C] mb-4">
+                        Sulphate Resistant (SRC)
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Designed for marine/coastal projects. High resistance to chemical attacks.
+                    </p>
+                </div>
+
+                <!-- Card 3: Clinker & Raw Materials -->
+                <div class="product-card bg-white rounded-2xl p-8 hover:shadow-xl">
+                    <div class="product-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-layer-group text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#2C2C2C] mb-4">
+                        Clinker & Raw Materials
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Premium semi-finished clinker for grinding plants. Available in Bulk shipments.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGISTICS SECTION -->
+    <section id="logistics" class="py-16 md:py-24 bg-[#FAFAFA]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Section Title & Description -->
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-bold text-[#2C2C2C] mb-6">
+                        Global Logistics Solutions
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We handle the complete supply chain from Turkish factories to your project site.
+                        Our logistics expertise ensures timely delivery and seamless customs clearance.
+                    </p>
+
+                    <!-- Timeline Features -->
+                    <div class="space-y-6">
+                        <div class="timeline-item">
+                            <div class="bg-white p-6 rounded-xl shadow-sm">
+                                <h4 class="font-bold text-[#2C2C2C] text-lg mb-2">
+                                    <i class="fas fa-ship text-[#C85A17] mr-2"></i>
+                                    Bulk Shipments
+                                </h4>
+                                <p class="text-gray-600">
+                                    Minimum 5,000 MT - Optimized for large-scale projects
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="bg-white p-6 rounded-xl shadow-sm">
+                                <h4 class="font-bold text-[#2C2C2C] text-lg mb-2">
+                                    <i class="fas fa-box text-[#C85A17] mr-2"></i>
+                                    Big Bags Available
+                                </h4>
+                                <p class="text-gray-600">
+                                    1.5 MT Sling Bags - Flexible packaging solutions
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="bg-white p-6 rounded-xl shadow-sm">
+                                <h4 class="font-bold text-[#2C2C2C] text-lg mb-2">
+                                    <i class="fas fa-anchor text-[#C85A17] mr-2"></i>
+                                    Loading Ports
+                                </h4>
+                                <p class="text-gray-600">
+                                    Mersin, Iskenderun, Istanbul - Strategic port access
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Logistics Visual with World Map -->
+                <div class="relative world-map-container">
+                    <!-- SVG World Map (More Detailed) -->
+                    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                        <!-- Background -->
+                        <rect width="1000" height="500" fill="#F8FAFC" />
+
+                        <!-- More Realistic Continents -->
+                        <g opacity="0.12" fill="#646464" stroke="#8B8B8B" stroke-width="0.5">
+                            <!-- North America -->
+                            <path
+                                d="M150,100 L200,90 L250,95 L290,110 L310,140 L315,180 L305,210 L280,230 L250,240 L220,245 L190,235 L170,215 L155,185 L148,150 Z" />
+                            <path d="M200,240 L230,235 L250,250 L255,270 L248,285 L230,295 L210,290 L195,275 Z" />
+
+                            <!-- South America -->
+                            <path
+                                d="M270,260 L300,255 L320,265 L335,285 L340,315 L338,350 L325,385 L305,410 L280,425 L260,420 L250,395 L245,360 L248,320 L255,285 Z" />
+
+                            <!-- Europe -->
+                            <path
+                                d="M480,110 L510,105 L535,108 L555,115 L565,125 L560,140 L545,155 L525,165 L505,163 L490,155 L482,140 L478,125 Z" />
+                            <path d="M460,150 L485,145 L505,148 L515,158 L512,170 L500,178 L480,175 L465,165 Z" />
+
+                            <!-- Africa -->
+                            <path
+                                d="M470,165 L510,163 L545,170 L565,185 L575,210 L580,245 L575,285 L565,320 L545,350 L520,370 L490,378 L460,372 L440,355 L430,325 L428,290 L435,250 L448,210 L460,185 Z" />
+
+                            <!-- Asia -->
+                            <path
+                                d="M570,110 L650,105 L720,115 L770,135 L810,165 L835,195 L845,225 L840,255 L820,280 L785,298 L745,305 L700,300 L660,285 L630,260 L610,230 L595,195 L585,160 L578,130 Z" />
+                            <path
+                                d="M750,310 L780,305 L805,315 L820,335 L818,360 L805,380 L785,388 L760,383 L745,365 L743,340 Z" />
+
+                            <!-- Australia -->
+                            <path
+                                d="M780,340 L820,338 L855,348 L875,365 L880,390 L870,415 L850,430 L820,435 L790,428 L770,410 L765,385 L770,360 Z" />
+                        </g>
+
+                        <!-- Animated Trade Routes (Curved Bezier Paths) -->
+                        <!-- Turkey to Ghana -->
+                        <path class="trade-route" d="M520,140 Q490,180 470,230" stroke-width="2.5" />
+
+                        <!-- Turkey to Houston (North America) -->
+                        <path class="trade-route" d="M520,140 Q400,120 280,180" stroke-width="2.5" />
+
+                        <!-- Turkey to Ivory Coast -->
+                        <path class="trade-route" d="M520,140 Q485,170 455,210" stroke-width="2.5" />
+
+                        <!-- Pulsing Dots for Key Locations -->
+                        <!-- Turkey (Source) - Larger dot -->
+                        <circle cx="520" cy="140" r="8" fill="#C85A17" opacity="0.9">
+                            <animate attributeName="r" values="8;14;8" dur="2.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.9;1;0.9" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="520" cy="140" r="8" fill="#C85A17" opacity="0.3">
+                            <animate attributeName="r" values="8;20;8" dur="2.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.3;0;0.3" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Ghana -->
+                        <circle cx="470" cy="230" r="6" fill="#C85A17" opacity="0.8">
+                            <animate attributeName="r" values="6;10;6" dur="2.5s" begin="0.5s"
+                                repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" begin="0.5s"
+                                repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Houston, USA -->
+                        <circle cx="280" cy="180" r="6" fill="#C85A17" opacity="0.8">
+                            <animate attributeName="r" values="6;10;6" dur="2.5s" begin="1s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" begin="1s"
+                                repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Ivory Coast -->
+                        <circle cx="455" cy="210" r="6" fill="#C85A17" opacity="0.8">
+                            <animate attributeName="r" values="6;10;6" dur="2.5s" begin="1.5s"
+                                repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" begin="1.5s"
+                                repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Location Labels on Map -->
+                        <text x="520" y="130" text-anchor="middle" fill="#2C2C2C" font-size="11"
+                            font-weight="bold">TURKEY</text>
+                        <text x="470" y="245" text-anchor="middle" fill="#646464" font-size="10">Ghana</text>
+                        <text x="280" y="170" text-anchor="middle" fill="#646464" font-size="10">Houston</text>
+                        <text x="455" y="200" text-anchor="middle" fill="#646464" font-size="10">Ivory Coast</text>
+                    </svg>
+
+                    <!-- Labels Below Map -->
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-4 h-4 bg-[#C85A17] rounded-full mx-auto mb-2"></div>
+                            <span class="text-gray-800 font-bold">Turkey</span>
+                            <p class="text-xs text-gray-500 mt-1">Production Source</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-4 h-4 bg-[#C85A17] rounded-full mx-auto mb-2 opacity-70"></div>
+                            <span class="text-gray-800 font-bold">Ghana</span>
+                            <p class="text-xs text-gray-500 mt-1">West Africa Hub</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-4 h-4 bg-[#C85A17] rounded-full mx-auto mb-2 opacity-70"></div>
+                            <span class="text-gray-800 font-bold">Houston</span>
+                            <p class="text-xs text-gray-500 mt-1">USA Gateway</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                            <div class="w-4 h-4 bg-[#C85A17] rounded-full mx-auto mb-2 opacity-70"></div>
+                            <span class="text-gray-800 font-bold">Ivory Coast</span>
+                            <p class="text-xs text-gray-500 mt-1">Strategic Port</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl lg:text-5xl font-bold text-[#2C2C2C] mb-6">
+                    Get in Touch
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Ready to start your project? Contact us today for a personalized consultation.
+                </p>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-gradient-to-br from-[#F8FAFC] to-white p-8 lg:p-12 rounded-3xl shadow-xl">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                                Company Name *
+                            </label>
+                            <input type="text" name="company" required placeholder="Your company name"
+                                class="form-input w-full px-4 py-3 rounded-lg bg-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                                Email Address *
+                            </label>
+                            <input type="email" name="email" required placeholder="your.email@company.com"
+                                class="form-input w-full px-4 py-3 rounded-lg bg-white">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#2C2C2C] mb-2">
+                            Your Request *
+                        </label>
+                        <textarea name="message" required rows="6"
+                            placeholder="Tell us about your project requirements, quantity needed, destination, timeline, etc."
+                            class="form-input w-full px-4 py-3 rounded-lg resize-none bg-white"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="btn-primary w-full text-white px-8 py-4 rounded-full font-semibold text-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message
+                    </button>
+                </form>
+
+                <!-- Contact Info -->
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#C85A17] to-[#D2691E] rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#2C2C2C] mb-1">Email Us</h4>
+                                <a href="mailto:avorahub.export@gmail.com"
+                                    class="text-gray-700 hover:text-[#C85A17] transition-colors">
+                                    avorahub.export@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#C85A17] to-[#D2691E] rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#2C2C2C] mb-1">Call Us</h4>
+                                <a href="tel:+905453175206"
+                                    class="text-gray-700 hover:text-[#C85A17] transition-colors">
+                                    +90 545 317 52 06
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#2C2C2C] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <!-- Column 1: Brand -->
+                <div>
+                    <h3
+                        class="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-[#C85A17] bg-clip-text text-transparent">
+                        AVORAHUB</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Global Sourcing Partner for premium construction materials from Turkey.
+                    </p>
+                </div>
+
+                <!-- Column 2: Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-[#C85A17]">Contact</h4>
+                    <div class="space-y-3 text-gray-400">
+                        <p>
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:avorahub.export@gmail.com" class="hover:text-white transition-colors">
+                                avorahub.export@gmail.com
+                            </a>
+                        </p>
+                        <p>
+                            <i class="fas fa-phone mr-2"></i>
+                            <a href="tel:+905453175206" class="hover:text-white transition-colors">
+                                +90 545 317 52 06
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Column 3: Address -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-[#C85A17]">Address</h4>
+                    <p class="text-gray-400 leading-relaxed">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Duzce University Technopark Area<br>
+                        <span class="ml-5">Duzce / TURKEY</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2026 AvoraHub. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-[#C85A17] transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#C85A17] transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-[#C85A17] transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/905453175206" target="_blank" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('quote-modal');
+        const openModalBtns = [
+            document.getElementById('open-modal-btn'),
+            document.getElementById('hero-cta-btn')
+        ];
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModalBtn.addEventListener('click', function () {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Quote form submission
+        const quoteForm = document.getElementById('quote-form');
+        quoteForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show success alert
+            alert('Thank you! Our team will contact you shortly.');
+
+            // Close modal and reset form
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            quoteForm.reset();
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            // Prepare email body
+            let emailBody = `New Contact Form Submission from AvoraHub Website%0D%0A%0D%0A`;
+            emailBody += `Company: ${data.company}%0D%0A`;
+            emailBody += `Email: ${data.email}%0D%0A`;
+            emailBody += `Message: ${data.message}%0D%0A`;
+
+            // Open email client
+            window.location.href = `mailto:avorahub.export@gmail.com?subject=Contact Form: ${data.company}&body=${emailBody}`;
+
+            // Show success message
+            alert('Thank you for reaching out! Your email client will open to send your message.');
+
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Smooth scroll with offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.product-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

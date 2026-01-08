@@ -1,0 +1,9 @@
+# AvoraHub dependencies and system files
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+node_modules/
+*.tmp
+*.bak
