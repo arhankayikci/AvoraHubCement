@@ -7,3 +7,6 @@ Thumbs.db
 node_modules/
 *.tmp
 *.bak
+
+# Local Netlify folder
+.netlify
