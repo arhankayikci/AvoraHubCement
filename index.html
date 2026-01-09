@@ -19,6 +19,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         * {
@@ -1120,18 +1121,136 @@
         });
 
         // Quote form submission
+        // ==========================================
+        //  SUPABASE CONFIGURATION
+        // ==========================================
+        const SUPABASE_URL = 'https://sqjtuqoiiiqhkmseyuiez.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxanR1cW9paWxxaGttc3l1aWV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5MDU5NTQsImV4cCI6MjA4MzQ4MTk1NH0.fOdhPouy_qhgbMKnffRGaXrXSd1_C1Wk4gr4CTIUW6A';
+
+        // Initialize Supabase
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Toast Notification System
+        function showToast(message, type = 'success') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.style.cssText = `
+                    position: fixed;
+                    bottom: 24px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 10000;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(container);
+            }
+
+            const toast = document.createElement('div');
+
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            const color = type === 'success' ? '#10B981' : '#EF4444';
+
+            toast.style.cssText = `
+                background: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-width: 320px;
+                transform: translateY(100px);
+                opacity: 0;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                pointer-events: auto;
+                border-left: 4px solid ${color};
+            `;
+
+            toast.innerHTML = `
+                <i class="fas ${icon}" style="color: ${color}; font-size: 20px;"></i>
+                <div style="font-weight: 500; color: #1F2937;">${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            // Trigger animation
+            setTimeout(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+            }, 10);
+
+            // Remove after 4 seconds
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        // ==========================================
+        //  FORM SUBMISSION LOGIC
+        // ==========================================
         const quoteForm = document.getElementById('quote-form');
-        quoteForm.addEventListener('submit', function (e) {
-            e.preventDefault();
 
-            // Show success alert
-            alert('Thank you! Our team will contact you shortly.');
+        if (quoteForm) {
+            quoteForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const submitBtn = quoteForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
 
-            // Close modal and reset form
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            quoteForm.reset();
-        });
+                // 1. Loading State
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.disabled = true;
+
+                // 2. Collect Data
+                const formData = new FormData(quoteForm);
+                const leadData = {
+                    fullname: formData.get('fullname'),
+                    company: formData.get('company'),
+                    whatsapp: formData.get('whatsapp'),
+                    product: formData.get('product'),
+                    quantity: formData.get('quantity'),
+                    destination: formData.get('destination')
+                };
+
+                try {
+                    // 3. Send to Supabase
+                    const { error } = await supabase
+                        .from('leads')
+                        .insert([leadData]);
+
+                    if (error) throw error;
+
+                    // 4. Success Handling
+                    showToast('Quote request received! We will contact you shortly.', 'success');
+                    quoteForm.reset();
+
+                    setTimeout(() => {
+                        const modal = document.getElementById('quote-modal');
+                        if (modal) {
+                            modal.classList.remove('active');
+                            document.body.style.overflow = 'auto';
+                        }
+                    }, 2000);
+
+                } catch (error) {
+                    // 5. Error Handling
+                    console.error('Submission Error:', error);
+                    showToast('Failed to send request. Please try again.', 'error');
+                } finally {
+                    // 6. Reset Button
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }
+            });
+        }
 
         // Contact form submission
         const contactForm = document.getElementById('contact-form');
