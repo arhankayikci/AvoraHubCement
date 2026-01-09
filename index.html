@@ -1253,28 +1253,52 @@
         }
 
         // Contact form submission
+        // Contact form submission
         const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
 
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
 
-            // Prepare email body
-            let emailBody = `New Contact Form Submission from AvoraHub Website%0D%0A%0D%0A`;
-            emailBody += `Company: ${data.company}%0D%0A`;
-            emailBody += `Email: ${data.email}%0D%0A`;
-            emailBody += `Message: ${data.message}%0D%0A`;
+                // 1. Loading State
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.disabled = true;
 
-            // Open email client
-            window.location.href = `mailto:avorahub.export@gmail.com?subject=Contact Form: ${data.company}&body=${emailBody}`;
+                // 2. Collect Data
+                const formData = new FormData(contactForm);
+                const leadData = {
+                    company: formData.get('company'),
+                    email: formData.get('email'),
+                    message: formData.get('message')
+                };
 
-            // Show success message
-            alert('Thank you for reaching out! Your email client will open to send your message.');
+                try {
+                    // 3. Send to Supabase
+                    const { error } = await supabase
+                        .from('leads')
+                        .insert([leadData]);
 
-            // Reset form
-            contactForm.reset();
-        });
+                    if (error) throw error;
+
+                    // 4. Success Handling
+                    showToast('Message sent successfully! We will get back to you shortly.', 'success');
+                    contactForm.reset();
+
+                } catch (error) {
+                    // 5. Error Handling
+                    console.error('Contact Form Error:', error);
+                    showToast('Failed to send message. Please try again.', 'error');
+                } finally {
+                    // 6. Reset Button
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }
+            });
+        }
 
         // Smooth scroll with offset for fixed navbar
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
