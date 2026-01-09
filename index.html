@@ -1227,12 +1227,10 @@
                     // 2. Collect Data
                     const formData = new FormData(quoteForm);
                     const leadData = {
-                        fullname: formData.get('fullname'),
-                        company: formData.get('company'),
-                        whatsapp: formData.get('whatsapp'),
-                        product: formData.get('product'),
-                        quantity: formData.get('quantity'),
-                        destination: formData.get('destination')
+                        full_name: formData.get('fullname'),  // Map to table column
+                        company_name: formData.get('company'), // Map to table column
+                        phone: formData.get('whatsapp'),       // Map to table column
+                        message: `Product: ${formData.get('product')}, Quantity: ${formData.get('quantity')} MT, Destination: ${formData.get('destination')}`
                     };
 
                     try {
@@ -1286,7 +1284,7 @@
                     // 2. Collect Data
                     const formData = new FormData(contactForm);
                     const leadData = {
-                        company: formData.get('company'),
+                        company_name: formData.get('company'), // Map to table column
                         email: formData.get('email'),
                         message: formData.get('message')
                     };
